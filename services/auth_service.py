@@ -5,8 +5,8 @@ import os
 def authenticate(user_name, password):
         
         try: 
-    
-            with open("data/users.csv", "r", newline="") as f:
+            file = os.path.join("data", "users.csv")
+            with open(file, "r", newline="") as f:
                 reader = csv.reader(f)
                 for row in reader:
                     if not row or len(row) < 2:
@@ -27,8 +27,8 @@ def create_user(user_name, password):
     try:
 
         exists = False
-        
-        with open("data\\users.csv", "r") as f:
+        file = os.path.join("data", "users.csv")
+        with open(file, "r") as f:
                 reader = csv.reader(f)
 
                 for row in reader:
@@ -41,7 +41,8 @@ def create_user(user_name, password):
         if exists:
                 raise ValueError("User already exists")
         else:
-            with open("data\\users.csv", "a") as f:
+            file = os.path.join("data", "users.csv")
+            with open(file, "a") as f:
                 writer = csv.writer(f)
                 writer.writerow([user_name, password])
             
